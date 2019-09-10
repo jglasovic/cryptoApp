@@ -1,14 +1,15 @@
 import React from 'react';
-// import { Image } from 'react-native';
 
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 import { View } from 'react-native';
+import List from './List';
 // const TabBarComponent = props => <BottomTabBar {...props} />;
 
 const AppTabs = createBottomTabNavigator(
   {
-    SelectPassengers: () => <View style={{ flex: 1, backgroundColor: 'yellow' }} />,
-    SelectDates: () => <View style={{ flex: 1, backgroundColor: 'blue' }} />,
+    List,
+    Favorites: () => <View style={{ flex: 1, backgroundColor: 'blue' }} />,
+    Config: () => <View style={{ flex: 1, backgroundColor: 'red' }} />,
   },
   {}
 );

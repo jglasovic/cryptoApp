@@ -3,7 +3,7 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 import _ from 'lodash';
 import qs from 'qs';
 
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL, API_KEY } from '../config';
 
 // import GlobalErrorHandler from './GlobalErrorHandler';
 
@@ -52,7 +52,7 @@ export class NetworkClient {
 
     const constructedParams = {
       ...filter,
-      ...this.getAppQueryParams(),
+      // ...this.getAppQueryParams(),
     };
 
     const configs = {
@@ -109,18 +109,8 @@ export class NetworkClient {
   getHeaders() {
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded', // TODO: check this
+      authorization: `Apikey ${API_KEY}`,
     };
-
-    if (!this.store) {
-      return headers;
-    }
-
-    // const state = this.store.getState();
-    const token = ''; //getXToken(state);
-
-    if (token) {
-      headers['X-TOKEN'] = token;
-    }
 
     return headers;
   }
