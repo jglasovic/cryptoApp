@@ -1,4 +1,6 @@
-export const appReducer = (state = {}, action) => {
+const initalState = {};
+
+export const appReducer = (state = initalState, action) => {
   switch (action.type) {
     case '': {
       return { ...state, lang: action.payload };

@@ -4,7 +4,7 @@ import { createLogger } from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import reducers from '../reducers';
+import reducers from '../redux/reducers';
 
 const persistConfig = {
   key: 'root',
