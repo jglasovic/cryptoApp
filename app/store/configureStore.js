@@ -9,6 +9,7 @@ import reducers from '../redux/reducers';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  whitelist: ['user'],
 };
 
 const configureStore = (initialState = {}, additionalMiddlewares = []) => {

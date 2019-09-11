@@ -1,14 +1,28 @@
-import { AppActionTypes } from '../actions/app';
+import { getAllCoinsTypes, getCoinsTypes } from '../actions/app';
 
-const initalState = {
-  data: [],
-  currancy: ['AUD', 'CAD', 'CZK', 'DKK', 'HUF', 'JPY', 'NOK', 'SEK', 'CHF', 'GBP', 'USD', 'EUR', 'PLN', 'HRK'],
+const initialState = {
+  allCoins: {},
+  popularCoins: {},
+  currency: ['AUD', 'CAD', 'CZK', 'DKK', 'HUF', 'JPY', 'NOK', 'SEK', 'CHF', 'GBP', 'USD', 'EUR', 'PLN', 'HRK'],
+  popular: ['BTC', 'ETH', 'LTC'],
+  loadingAll: true,
+  loadingPopular: true,
 };
 
-export const appReducer = (state = initalState, action) => {
+export const appReducer = (state = initialState, action) => {
   switch (action.type) {
-    case AppActionTypes.SUCCESS: {
-      return { ...state, data: action.payload.data };
+    case getAllCoinsTypes.REQUEST: {
+      return { ...state, loadingAll: true };
+    }
+    case getAllCoinsTypes.SUCCESS: {
+      return { ...state, allCoins: action.payload.data, loadingAll: false };
+    }
+
+    case getCoinsTypes.REQUEST: {
+      return { ...state, loadingPopular: true };
+    }
+    case getCoinsTypes.SUCCESS: {
+      return { ...state, popularCoins: action.payload.DISPLAY, loadingPopular: false };
     }
 
     default:

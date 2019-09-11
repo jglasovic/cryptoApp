@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import { CHANGE_CURRENCY, ADD_TO_FAV_LIST, REMOVE_FROM_FAV_LIST } from '../actions/user';
 
-const initalState = {
+const initialState = {
   currency: 'USD',
   favList: [],
 };
 
-export const appReducer = (state = initalState, action) => {
+export const appReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_CURRENCY: {
       return { ...state, currency: action.payload };
