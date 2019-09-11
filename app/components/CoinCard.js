@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     padding: 8,
     alignItems: 'center',
-    // justifyContent: 'space-between',
   },
   img: { height: 40, width: 40, marginRight: 15 },
   text: { color: 'white' },

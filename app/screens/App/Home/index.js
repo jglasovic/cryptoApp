@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { View, FlatList, SafeAreaView, Text, TextInput, StyleSheet } from 'react-native';
 import CoinCard from '../../../components/CoinCard';
 import moment from 'moment';
 import { getMediaUrl } from '../../../utils/media';
 import AppActions from '../../../redux/actions/app';
+import LoaderScreen from '../../Loader';
 
-const Home = ({ currency, popularCoins, allCoins, navigation, getCoin }) => {
+const Home = ({ currency, popularCoins, getPopular, popular, loadingPopular, allCoins, navigation, getCoin }) => {
   const [searchText, handleSearch] = useState('');
+  useEffect(() => {
+    getPopular({ fsyms: popular, tsyms: currency });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currency]);
   const popularList = Object.keys(popularCoins).map(key => ({ ...popularCoins[key][currency], ...allCoins[key] }));
   const allList = Object.keys(allCoins)
     .map(key => allCoins[key])
@@ -20,18 +25,22 @@ const Home = ({ currency, popularCoins, allCoins, navigation, getCoin }) => {
     <SafeAreaView style={style.container}>
       <View style={style.content}>
         <Text style={style.text}>Popular</Text>
-        <View style={style.list}>
-          {popularList.map(coin => (
-            <CoinCard
-              key={coin.id}
-              id={coin.id}
-              symbol={coin.symbol}
-              imgUrl={getMediaUrl(coin.imageUrl)}
-              name={coin.fullName}
-              price={coin.PRICE}
-              onPress={handleNavigation}
-            />
-          ))}
+        <View style={[style.list, { height: 225, borderBottomWidth: 1 }]}>
+          {loadingPopular ? (
+            <LoaderScreen />
+          ) : (
+            popularList.map(coin => (
+              <CoinCard
+                key={coin.id}
+                id={coin.id}
+                symbol={coin.symbol}
+                imgUrl={getMediaUrl(coin.imageUrl)}
+                name={coin.fullName}
+                price={coin.PRICE}
+                onPress={handleNavigation}
+              />
+            ))
+          )}
         </View>
         <Text style={style.text}>All Coins</Text>
         <TextInput
@@ -64,12 +73,15 @@ const Home = ({ currency, popularCoins, allCoins, navigation, getCoin }) => {
 
 const dispatchProps = {
   getCoin: AppActions.getCoin,
+  getPopular: AppActions.getCoins,
 };
 
 const stateProps = ({ app, user }) => ({
   currency: user.currency,
   popularCoins: app.popularCoins,
   allCoins: app.allCoins,
+  popular: app.popular,
+  loadingPopular: app.loadingPopular,
 });
 
 export default connect(

@@ -4,7 +4,7 @@ const initialState = {
   allCoins: {},
   popularCoins: {},
   selectedCoin: {},
-  currency: ['AUD', 'CAD', 'CZK', 'DKK', 'HUF', 'JPY', 'NOK', 'SEK', 'CHF', 'GBP', 'USD', 'EUR', 'PLN', 'HRK'],
+  currencyList: ['AUD', 'CAD', 'CZK', 'DKK', 'HUF', 'JPY', 'NOK', 'SEK', 'CHF', 'GBP', 'USD', 'EUR', 'PLN', 'HRK'],
   popular: ['BTC', 'ETH', 'LTC'],
   loadingAll: true,
   loadingPopular: true,

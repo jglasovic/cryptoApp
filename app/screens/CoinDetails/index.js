@@ -6,6 +6,7 @@ import CoinDetailsCard from '../../components/CoinDetailsCard';
 
 const CoinDetails = props => {
   const code = props.navigation.getParam('code');
+  const { currency, selectedCoin, allCoins, loadingSelectedCoin, favList } = props;
   const handleChange = value => {
     if (value) {
       props.addToFavList(code);
@@ -13,17 +14,13 @@ const CoinDetails = props => {
       props.removeFromFavList(code);
     }
   };
-  const isInFavList = props.favList.includes(code);
-  // console.log(props.selectedCoin[code], props.loadingSelectedCoin || !props.selectedCoin[code]);
-  return props.loadingSelectedCoin || !props.selectedCoin[code] ? (
+  const isInFavList = favList.includes(code);
+  const selectedCoinData = selectedCoin && props.selectedCoin[code] && props.selectedCoin[code][currency];
+  const loading = loadingSelectedCoin || !selectedCoinData;
+  return loading ? (
     <LoaderScreen />
   ) : (
-    <CoinDetailsCard
-      {...props.selectedCoin[code][props.currency]}
-      {...props.allCoins[code]}
-      inFav={isInFavList}
-      onChange={handleChange}
-    />
+    <CoinDetailsCard {...selectedCoinData} {...allCoins[code]} inFav={isInFavList} onChange={handleChange} />
   );
 };
 
