@@ -3,7 +3,7 @@ import { TouchableOpacity, Image, Text, View, StyleSheet } from 'react-native';
 
 const CoinCard = props => {
   const handlePress = () => {
-    props.onPress(props.id);
+    props.onPress(props.symbol);
   };
   return (
     <View style={styles.container}>

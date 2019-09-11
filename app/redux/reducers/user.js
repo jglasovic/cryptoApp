@@ -15,7 +15,10 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, favList: [...state.favList, action.payload] };
     }
     case REMOVE_FROM_FAV_LIST: {
-      const favList = [..._.remove(state.favList, el => el === action.payload)];
+      const favList = [...state.favList];
+      _.remove(favList, n => {
+        return n === action.payload;
+      });
       return { ...state, favList };
     }
 

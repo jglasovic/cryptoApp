@@ -12,10 +12,9 @@ const Home = ({ currency, popularCoins, allCoins, navigation, getCoin }) => {
   const allList = Object.keys(allCoins)
     .map(key => allCoins[key])
     .filter(coin => coin.fullName.toLowerCase().indexOf(searchText.toLowerCase()) > -1);
-
   const handleNavigation = code => {
     getCoin({ fsyms: code, tsyms: currency });
-    navigation.navigate('CoinDetails');
+    navigation.navigate('CoinDetails', { code });
   };
   return (
     <SafeAreaView style={style.container}>
@@ -26,6 +25,7 @@ const Home = ({ currency, popularCoins, allCoins, navigation, getCoin }) => {
             <CoinCard
               key={coin.id}
               id={coin.id}
+              symbol={coin.symbol}
               imgUrl={getMediaUrl(coin.imageUrl)}
               name={coin.fullName}
               price={coin.PRICE}
@@ -47,6 +47,7 @@ const Home = ({ currency, popularCoins, allCoins, navigation, getCoin }) => {
             renderItem={({ item }) => (
               <CoinCard
                 id={item.id}
+                symbol={item.symbol}
                 imgUrl={getMediaUrl(item.imageUrl)}
                 name={item.fullName}
                 createdOn={moment.unix(item.contentCreatedOn).format('MMMM Do YYYY')}
