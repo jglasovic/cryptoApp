@@ -2,9 +2,12 @@ import React from 'react';
 import { TouchableOpacity, Image, Text, View, StyleSheet } from 'react-native';
 
 const CoinCard = props => {
+  const handlePress = () => {
+    props.onPress(props.id);
+  };
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.innerContent} disabled={!props.onPress}>
+      <TouchableOpacity style={styles.innerContent} disabled={!props.onPress} onPress={handlePress}>
         <Image source={{ uri: props.imgUrl }} resizeMode="contain" style={styles.img} />
         <View>
           <Text style={styles.text}>{props.name}</Text>

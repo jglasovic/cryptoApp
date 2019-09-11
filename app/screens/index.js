@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import RootNavigator from './rootNavigation';
+import RootNavigator from './rootNavigator';
 import { createAppContainer } from 'react-navigation';
 import NavigationService from '../services/NavigationService';
 import AppActions from '../redux/actions/app';
