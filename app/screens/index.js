@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import RootNavigator from './rootNavigator';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, SafeAreaView } from 'react-navigation';
 import NavigationService from '../services/NavigationService';
 import AppActions from '../redux/actions/app';
 import { connect } from 'react-redux';
@@ -12,11 +12,13 @@ const AppContainer = props => {
   const { getPopular, getAll } = props;
   useEffect(() => {
     getAll();
-  }, [getAll]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     getPopular({ fsyms: props.popular, tsyms: props.currency });
-  }, [getPopular, props.currency, props.popular]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.currency]);
 
   return props.loadingAll || props.loadingPopular ? (
     <LoaderScreen />

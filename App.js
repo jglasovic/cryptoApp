@@ -11,7 +11,7 @@ export const { store, persistor } = configureStore({}, [thunk.withExtraArgument(
 const App = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <StatusBar />
+      <StatusBar barStyle="light-content" translucent={true} />
       <AppContainer />
     </PersistGate>
   </Provider>
