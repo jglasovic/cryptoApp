@@ -1,26 +1,31 @@
 import React from 'react';
 
-import {
-  createBottomTabNavigator,
-  //BottomTabBar
-} from 'react-navigation-tabs';
-// import { View } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from './Home';
 import Favorites from './Favorites';
 import Options from './Options';
 import { Icon } from 'react-native-elements';
-// const TabBarComponent = props => <BottomTabBar {...props} />;
 
 const AppTabs = createBottomTabNavigator(
   {
     Home: {
       screen: Home,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) => <Icon name="fa-home" color={tintColor} />,
+        tabBarIcon: ({ tintColor }) => <Icon name="home" color={tintColor} />,
       },
     },
-    Favorites,
-    Options,
+    Favorites: {
+      screen: Favorites,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => <Icon name="list" color={tintColor} />,
+      },
+    },
+    Options: {
+      screen: Options,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => <Icon name="config" color={tintColor} />,
+      },
+    },
   },
   {}
 );
