@@ -1,3 +1,2 @@
 # cryptoApp
-
-React-Native application
+React-Native app
